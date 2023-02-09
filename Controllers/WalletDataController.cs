@@ -23,9 +23,10 @@ namespace CryptoTracker.Controllers
             return db.Wallets;
         }
 
-        // GET: api/WalletData/5
+        // GET: api/WalletData/FindWallet/5
+        [HttpGet]
         [ResponseType(typeof(Wallet))]
-        public IHttpActionResult GetWallet(int id)
+        public IHttpActionResult FindWallet(int id)
         {
             Wallet wallet = db.Wallets.Find(id);
             if (wallet == null)
@@ -36,9 +37,10 @@ namespace CryptoTracker.Controllers
             return Ok(wallet);
         }
 
-        // PUT: api/WalletData/5
+        // PUT: api/WalletData/AddWallet/5
+        [HttpPost]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutWallet(int id, Wallet wallet)
+        public IHttpActionResult AddWallet(int id, Wallet wallet)
         {
             if (!ModelState.IsValid)
             {
@@ -71,9 +73,10 @@ namespace CryptoTracker.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/WalletData
+        // POST: api/WalletData/UpdateWallet
+        [HttpPost]
         [ResponseType(typeof(Wallet))]
-        public IHttpActionResult PostWallet(Wallet wallet)
+        public IHttpActionResult UpdateWallet(Wallet wallet)
         {
             if (!ModelState.IsValid)
             {
@@ -86,7 +89,8 @@ namespace CryptoTracker.Controllers
             return CreatedAtRoute("DefaultApi", new { id = wallet.WalletId }, wallet);
         }
 
-        // DELETE: api/WalletData/5
+        // DELETE: api/WalletData/DeleteWallet/5
+        [HttpPost]
         [ResponseType(typeof(Wallet))]
         public IHttpActionResult DeleteWallet(int id)
         {
