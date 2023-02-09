@@ -231,6 +231,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Token.cs" />
+    <Compile Include="Models\ViewModels\DetailsWallet.cs" />
     <Compile Include="Models\Wallet.cs" />
     <Compile Include="Models\WalletxToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -294,6 +295,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Wallet\List.cshtml" />
+    <Content Include="Views\Wallet\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

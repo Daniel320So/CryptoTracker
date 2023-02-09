@@ -1,4 +1,5 @@
 ﻿using CryptoTracker.Models;
+using CryptoTracker.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -68,5 +69,31 @@ namespace CryptoTracker.Controllers
 
             return View(wallets);
         }
+
+        public ActionResult Details(int id)
+        {
+            DetailsWallet ViewModel = new DetailsWallet();
+
+            //objective: communicate with our wallet data api to retrieve one wallet
+            //curl https://localhost:44324/api/walletdata/findwallet/{id}
+
+            string url = "walletdata/findwallet/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            WalletDto SelectedWallet = response.Content.ReadAsAsync<WalletDto>().Result;
+
+            ViewModel.SelectedWallet = SelectedWallet;
+
+            //show associated keepers with this wallet
+            //url = "keeperdata/listkeepersforwallet/" + id;
+            //response = client.GetAsync(url).Result;
+            //IEnumerable<KeeperDto> ResponsibleKeepers = response.Content.ReadAsAsync<IEnumerable<KeeperDto>>().Result;
+
+            //ViewModel.ResponsibleKeepers = ResponsibleKeepers;
+
+
+            return View(ViewModel);
+        }
+
     }
 }

@@ -1,0 +1,22 @@
+﻿@model CryptoTracker.Models.ViewModels.DetailsWallet
+@{
+    ViewBag.Title = "View";
+}
+<h2>@Model.SelectedWallet.WalletName</h2>
+<nav>
+    <ul>
+        <li><a href="/Wallet/List">Go back to list</a></li>
+        <li><a href="/Wallet/Edit/@Model.SelectedWallet.WalletId">Update</a></li>
+        <li><a style="color:#ab2020;" href="/Wallet/DeleteConfirm/@Model.SelectedWallet.WalletId">Delete</a></li>
+    </ul>
+</nav>
+<div class="row">
+    <div class="col-md-6 col-sm-12">
+        <div>Description: @Model.SelectedWallet.WalletDescription</div>
+        <div>Type: @Model.SelectedWallet.WalletType</div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+
+    </div>
+
+</div>

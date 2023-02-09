@@ -21,5 +21,6 @@ namespace CryptoTracker.Models
         public string WalletName { get; set; }
         public string WalletDescription { get; set; }
         public string WalletType { get; set; }
+        public int WalletBalance { get; set; }
     }
 }

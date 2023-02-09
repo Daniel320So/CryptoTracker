@@ -138,5 +138,36 @@ namespace CryptoTracker.Controllers
         {
             return db.Wallets.Count(e => e.WalletId == id) > 0;
         }
+
+        /// <summary>
+        /// Gathers information about all Tokens related to a particular Wallet ID
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: Tokens in the database
+        /// </returns>
+        /// <param name="id">Wallet ID.</param>
+        /// <example>
+        /// GET: api/WalletData/ListTokensForWallet/3
+        /// </example>
+        [HttpGet]
+        [ResponseType(typeof(WalletxTokenDto))]
+        public IHttpActionResult ListTokensForWallet(int id)
+        {
+            List<WalletxToken> WxTs = db.WalletxTokens.Where(wxt => wxt.WalletId == id).Include(wxt => wxt.Token).ToList();
+
+            List<TokenDto> TokenDtos = new List<TokenDto>();
+
+            WxTs.ForEach(wxt => TokenDtos.Add(new TokenDto()
+            {
+                TokenId = wxt.Token.TokenId,
+                TokenName = wxt.Token.TokenName,
+                TokenDescription = wxt.Token.TokenDescription,
+                TokenRiskLevel = wxt.Token.TokenRiskLevel,
+                TokenBalance = wxt.balance
+            }));
+
+            return Ok(TokenDtos);
+        }
     }
 }

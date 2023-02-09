@@ -19,4 +19,15 @@ namespace CryptoTracker.Models
         public virtual Token Token { get; set; }
         public int balance { get; set; }
     }
+
+    public class WalletxTokenDto
+    {
+        public int WalletxTokenId { get; set; }
+
+        public int WalletId { get; set; }
+        public int TokenId { get; set; }
+
+        public decimal balance { get; set; }
+
+    }
 }
