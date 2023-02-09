@@ -9,11 +9,18 @@ namespace CryptoTracker.Models
     public class Token
     {
         [Key]
-        public int TokenID { get; set; }
+        public int TokenId { get; set; }
         public string TokenName { get; set; }
         public string TokenDescription { get; set; }
         public string TokenRiskLevel { get; set; }
-        public string newField { get; set; }
 
+    }
+
+    public class TokenDto
+    {
+        public int TokenId { get; set; }
+        public string TokenName { get; set; }
+        public string TokenDescription { get; set; }
+        public string TokenRiskLevel { get; set; }
     }
 }

@@ -18,9 +18,22 @@ namespace CryptoTracker.Controllers
 
         // GET: api/TokenData/ListTokens
         [HttpGet]
-        public IQueryable<Token> ListTokens()
+        public IEnumerable<TokenDto> ListTokens()
         {
-            return db.Tokens;
+            List<Token> Tokens = db.Tokens.ToList();
+            List<TokenDto> TokenDtos = new List<TokenDto>();
+
+            Tokens.ForEach(t => TokenDtos.Add(new TokenDto()
+            {
+                TokenId = t.TokenId,
+                TokenDescription = t.TokenDescription,
+                TokenName = t.TokenName,
+                TokenRiskLevel = t.TokenRiskLevel,
+
+            }));
+
+            return TokenDtos;
+
         }
 
         // GET: api/TokenData/FindTokens/5
@@ -29,12 +42,19 @@ namespace CryptoTracker.Controllers
         public IHttpActionResult FindToken(int id)
         {
             Token token = db.Tokens.Find(id);
+            TokenDto tokenDto = new TokenDto()
+            {
+                TokenId = token.TokenId,
+                TokenDescription = token.TokenDescription,
+                TokenName = token.TokenName,
+                TokenRiskLevel = token.TokenRiskLevel,
+            };
             if (token == null)
             {
                 return NotFound();
             }
 
-            return Ok(token);
+            return Ok(tokenDto);
         }
 
         // PUT: api/TokenData/AddToken/5
@@ -47,7 +67,7 @@ namespace CryptoTracker.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != token.TokenID)
+            if (id != token.TokenId)
             {
                 return BadRequest();
             }
@@ -86,7 +106,7 @@ namespace CryptoTracker.Controllers
             db.Tokens.Add(token);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = token.TokenID }, token);
+            return CreatedAtRoute("DefaultApi", new { id = token.TokenId }, token);
         }
 
         // DELETE: api/TokenData/DeleteToken/5
@@ -117,7 +137,7 @@ namespace CryptoTracker.Controllers
 
         private bool TokenExists(int id)
         {
-            return db.Tokens.Count(e => e.TokenID == id) > 0;
+            return db.Tokens.Count(e => e.TokenId == id) > 0;
         }
     }
 }

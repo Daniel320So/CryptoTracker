@@ -217,6 +217,14 @@
     <Compile Include="Migrations\202302091932331_newField.designer.cs">
       <DependentUpon>202302091932331_newField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202302092229462_removeField.cs" />
+    <Compile Include="Migrations\202302092229462_removeField.designer.cs">
+      <DependentUpon>202302092229462_removeField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202302092234413_fixTokenId.cs" />
+    <Compile Include="Migrations\202302092234413_fixTokenId.designer.cs">
+      <DependentUpon>202302092234413_fixTokenId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -238,6 +246,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="jsondata\wallet.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -321,6 +330,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202302091932331_newField.resx">
       <DependentUpon>202302091932331_newField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202302092229462_removeField.resx">
+      <DependentUpon>202302092229462_removeField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202302092234413_fixTokenId.resx">
+      <DependentUpon>202302092234413_fixTokenId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

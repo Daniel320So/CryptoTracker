@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using CryptoTracker.Migrations;
 using CryptoTracker.Models;
 
 namespace CryptoTracker.Controllers
@@ -18,9 +19,20 @@ namespace CryptoTracker.Controllers
 
         // GET: api/WalletData/ListWallets
         [HttpGet]
-        public IQueryable<Wallet> ListWallets()
+        public IEnumerable<WalletDto> ListWallets()
         {
-            return db.Wallets;
+            List<Wallet> Wallets = db.Wallets.ToList();
+            List<WalletDto> WalletDtos = new List<WalletDto>();
+
+            Wallets.ForEach(w => WalletDtos.Add(new WalletDto()
+            {
+                WalletId = w.WalletId,
+                WalletName = w.WalletName,
+                WalletDescription = w.WalletDescription,
+                WalletType = w.WalletType
+            }));
+
+            return WalletDtos;
         }
 
         // GET: api/WalletData/FindWallet/5
@@ -29,12 +41,19 @@ namespace CryptoTracker.Controllers
         public IHttpActionResult FindWallet(int id)
         {
             Wallet wallet = db.Wallets.Find(id);
+            WalletDto walletDto = new WalletDto()
+            {
+                WalletId = wallet.WalletId,
+                WalletName = wallet.WalletName,
+                WalletDescription = wallet.WalletDescription,
+                WalletType = wallet.WalletType
+            };
             if (wallet == null)
             {
                 return NotFound();
             }
 
-            return Ok(wallet);
+            return Ok(walletDto);
         }
 
         // PUT: api/WalletData/AddWallet/5

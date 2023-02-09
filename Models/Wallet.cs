@@ -14,4 +14,12 @@ namespace CryptoTracker.Models
         public string WalletDescription { get; set; }
         public string WalletType { get; set; }
     }
+
+    public class WalletDto
+    {
+        public int WalletId { get; set; }
+        public string WalletName { get; set; }
+        public string WalletDescription { get; set; }
+        public string WalletType { get; set; }
+    }
 }
