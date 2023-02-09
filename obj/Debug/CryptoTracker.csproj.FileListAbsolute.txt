@@ -116,3 +116,5 @@ C:\Users\dan32\source\repos\CryptoTracker\obj\Debug\CryptoTracker.Migrations.use
 C:\Users\dan32\source\repos\CryptoTracker\obj\Debug\CryptoTracker.csproj.GenerateResource.cache
 C:\Users\dan32\source\repos\CryptoTracker\obj\Debug\CryptoTracker.Migrations.wallet.resources
 C:\Users\dan32\source\repos\CryptoTracker\obj\Debug\CryptoTracker.Migrations.tokens.resources
+C:\Users\dan32\source\repos\CryptoTracker\obj\Debug\CryptoTracker.Migrations.fix.resources
+C:\Users\dan32\source\repos\CryptoTracker\obj\Debug\CryptoTracker.Migrations.fix2.resources

@@ -201,6 +201,14 @@
     <Compile Include="Migrations\202302091845489_tokens.designer.cs">
       <DependentUpon>202302091845489_tokens.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202302091919310_fix.cs" />
+    <Compile Include="Migrations\202302091919310_fix.designer.cs">
+      <DependentUpon>202302091919310_fix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202302091920097_fix2.cs" />
+    <Compile Include="Migrations\202302091920097_fix2.designer.cs">
+      <DependentUpon>202302091920097_fix2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -292,6 +300,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202302091845489_tokens.resx">
       <DependentUpon>202302091845489_tokens.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202302091919310_fix.resx">
+      <DependentUpon>202302091919310_fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202302091920097_fix2.resx">
+      <DependentUpon>202302091920097_fix2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
