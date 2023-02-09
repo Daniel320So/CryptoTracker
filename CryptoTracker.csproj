@@ -184,6 +184,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TokenDataController.cs" />
     <Compile Include="Controllers\WalletDataController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -196,10 +197,15 @@
     <Compile Include="Migrations\202302091830264_wallet.designer.cs">
       <DependentUpon>202302091830264_wallet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202302091845489_tokens.cs" />
+    <Compile Include="Migrations\202302091845489_tokens.designer.cs">
+      <DependentUpon>202302091845489_tokens.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Token.cs" />
     <Compile Include="Models\Wallet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -283,6 +289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202302091830264_wallet.resx">
       <DependentUpon>202302091830264_wallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202302091845489_tokens.resx">
+      <DependentUpon>202302091845489_tokens.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
