@@ -27,6 +27,7 @@ namespace CryptoTracker.Models
 
         public DbSet<Wallet> Wallets { get; set; }
         public DbSet<Token> Tokens { get; set; }
+        public DbSet<WalletxToken> WalletxTokens { get; set; }
 
         public static ApplicationDbContext Create()
         {

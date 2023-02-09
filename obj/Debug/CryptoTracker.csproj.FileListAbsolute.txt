@@ -118,3 +118,5 @@ C:\Users\dan32\source\repos\CryptoTracker\obj\Debug\CryptoTracker.Migrations.wal
 C:\Users\dan32\source\repos\CryptoTracker\obj\Debug\CryptoTracker.Migrations.tokens.resources
 C:\Users\dan32\source\repos\CryptoTracker\obj\Debug\CryptoTracker.Migrations.fix.resources
 C:\Users\dan32\source\repos\CryptoTracker\obj\Debug\CryptoTracker.Migrations.fix2.resources
+C:\Users\dan32\source\repos\CryptoTracker\obj\Debug\CryptoTracker.Migrations.fix1.resources
+C:\Users\dan32\source\repos\CryptoTracker\obj\Debug\CryptoTracker.Migrations.newField.resources

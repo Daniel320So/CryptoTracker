@@ -209,12 +209,21 @@
     <Compile Include="Migrations\202302091920097_fix2.designer.cs">
       <DependentUpon>202302091920097_fix2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202302091931283_fix1.cs" />
+    <Compile Include="Migrations\202302091931283_fix1.designer.cs">
+      <DependentUpon>202302091931283_fix1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202302091932331_newField.cs" />
+    <Compile Include="Migrations\202302091932331_newField.designer.cs">
+      <DependentUpon>202302091932331_newField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Token.cs" />
     <Compile Include="Models\Wallet.cs" />
+    <Compile Include="Models\WalletxToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -306,6 +315,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202302091920097_fix2.resx">
       <DependentUpon>202302091920097_fix2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202302091931283_fix1.resx">
+      <DependentUpon>202302091931283_fix1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202302091932331_newField.resx">
+      <DependentUpon>202302091932331_newField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
