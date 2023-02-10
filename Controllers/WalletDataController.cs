@@ -154,6 +154,7 @@ namespace CryptoTracker.Controllers
             return Ok(wallet);
         }
 
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

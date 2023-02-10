@@ -302,6 +302,8 @@
     <Content Include="Views\Token\List.cshtml" />
     <Content Include="Views\Wallet\New.cshtml" />
     <Content Include="Views\Wallet\Edit.cshtml" />
+    <Content Include="Views\Wallet\DeleteConfirm.cshtml" />
+    <Content Include="Views\Wallet\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

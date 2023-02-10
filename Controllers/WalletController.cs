@@ -164,5 +164,33 @@ namespace CryptoTracker.Controllers
             }
         }
 
+
+        public ActionResult DeleteConfirm(int id)
+        {
+            string url = "WalletData/findWallet/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            WalletDto selectedWallet = response.Content.ReadAsAsync<WalletDto>().Result;
+            return View(selectedWallet);
+        }
+
+        // POST: Booking/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            string url = "WalletData/deleteWallet/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+        }
+
     }
 }
