@@ -1,0 +1,15 @@
+﻿@model IEnumerable<CryptoTracker.Models.TokenDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+<a href="/Token/New">New Token</a>
+@foreach (var token in Model)
+{
+    <h2><a href="/Token/Details/@token.TokenId">@token.TokenName</a></h2>
+    <div>Description: @token.TokenDescription</div>
+    <div>Risk Level: @token.TokenRiskLevel</div>
+
+
+}

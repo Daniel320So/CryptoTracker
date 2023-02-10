@@ -11,12 +11,12 @@ using System.Web.Script.Serialization;
 
 namespace CryptoTracker.Controllers
 {
-    public class WalletController : Controller
+    public class TokenController : Controller
     {
         private static readonly HttpClient client;
         private JavaScriptSerializer jss = new JavaScriptSerializer();
 
-        static WalletController()
+        static TokenController()
         {
             HttpClientHandler handler = new HttpClientHandler()
             {
@@ -56,39 +56,39 @@ namespace CryptoTracker.Controllers
             return;
         }
 
-        // GET: Wallet/List
+        // GET: Token/List
         public ActionResult List()
         {
-            //objective: communicate with our wallet data api to retrieve a list of wallets
-            //curl https://localhost:44331/api/walletdata/listwallets
+            //objective: communicate with our token data api to retrieve a list of token
+            //curl https://localhost:44331/api/tokendata/listtokens
 
-            string url = "walletdata/listwallets";
+            string url = "tokendata/listtokens";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            IEnumerable<WalletDto> wallets = response.Content.ReadAsAsync<IEnumerable<WalletDto>>().Result;
+            IEnumerable<TokenDto> tokens = response.Content.ReadAsAsync<IEnumerable<TokenDto>>().Result;
 
-            return View(wallets);
+            return View(tokens);
         }
 
         public ActionResult Details(int id)
         {
-            DetailsWallet ViewModel = new DetailsWallet();
+            DetailsToken ViewModel = new DetailsToken();
 
-            //objective: communicate with our wallet data api to retrieve one wallet
-            //curl https://localhost:44324/api/walletdata/findwallet/{id}
+            //objective: communicate with our token data api to retrieve one token
+            //curl https://localhost:44324/api/tokendata/findtoken/{id}
 
-            string url = "walletdata/findwallet/" + id;
+            string url = "tokendata/findtoken/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            WalletDto SelectedWallet = response.Content.ReadAsAsync<WalletDto>().Result;
+            TokenDto SelectedToken = response.Content.ReadAsAsync<TokenDto>().Result;
 
-            ViewModel.SelectedWallet = SelectedWallet;
+            ViewModel.SelectedToken = SelectedToken;
 
-            url = "WalletData/ListTokensForWallet/" + id;
+            url = "TokenData/ListWalletsForToken/" + id;
             response = client.GetAsync(url).Result;
-            IEnumerable<TokenDto> Tokens = response.Content.ReadAsAsync<IEnumerable<TokenDto>>().Result;
+            IEnumerable<WalletDto> Wallets = response.Content.ReadAsAsync<IEnumerable<WalletDto>>().Result;
 
-            ViewModel.Tokens = Tokens;
+            ViewModel.Wallets = Wallets;
 
             return View(ViewModel);
         }

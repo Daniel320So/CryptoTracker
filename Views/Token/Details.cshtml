@@ -13,20 +13,20 @@
 <div class="row">
     <div class="col-md-6 col-sm-12">
         <div>Description: @Model.SelectedToken.TokenDescription</div>
-        <div>Type: @Model.SelectedToken.TokenType</div>
+        <div>Risk Level: @Model.SelectedToken.TokenRiskLevel</div>
     </div>
     <div class="col-md-6 col-sm-12">
-        <h2>Wallets:</h2>
+        <h2>Tokens:</h2>
         <table>
             <tr>
-                <th>Wallet</th>
+                <th>Token</th>
                 <th>Balance</th>
             </tr>
-            @foreach (var wallet in @Model.Wallet)
+            @foreach (var walet in @Model.Wallets)
             {
                 <tr>
-                    <td>@wallet.Wallet</td>
-                    <td>@wallet.WalletBalance</td>
+                    <td>@walet.WalletName</td>
+                    <td>@walet.WalletBalance</td>
                 </tr>
             }
         </table>

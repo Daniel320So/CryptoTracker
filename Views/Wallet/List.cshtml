@@ -1,15 +1,15 @@
-﻿@model IEnumerable<CryptoTracker.Models.WalletDto>
+﻿@model IEnumerable<CryptoTracker.Models.TokenDto>
 @{
     ViewBag.Title = "List";
 }
 
 <h2>List</h2>
-<a href="/Wallet/New">New Wallet</a>
+<a href="/Token/New">New Token</a>
 @foreach (var wallet in Model)
 {
-    <h2><a href="/Wallet/Details/@wallet.WalletId">@wallet.WalletName</a></h2>
-    <div>Description: @wallet.WalletDescription</div>
-    <div>Type: @wallet.WalletType</div>
+    <h2><a href="/Token/Details/@wallet.TokenId">@wallet.TokenName</a></h2>
+    <div>Description: @wallet.TokenDescription</div>
+    <div>Risk level: @wallet.TokenRiskLevel</div>
 
 
 }
