@@ -1,0 +1,27 @@
+﻿@model IEnumerable<CryptoTracker.Models.TokenDto>
+
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>Create Wallet</h2>
+<form action="/Wallet/Create" method="POST">
+    <div>
+        <label>Name:</label> <input type="text" name="WalletName" />
+    </div>
+    <div>
+        <label>Description:</label> <input type="text" name="WalletDescription" />
+    </div>
+    <div>
+        <label>Wallet Type:</label>
+        <select name="walletType">
+            <option value="Centralised Exchange Platform">Centralised Exchange Platform</option>
+            <option value="Decentralised Hot Wallet">Decentralised Hot Wallet</option>
+            <option value="Decentralised Cold Wallet">Decentralised Cold Wallet</option>
+        </select>
+    </div>
+    <div>
+        <input type="submit" value="Add Wallet" />
+
+    </div>
+</form>

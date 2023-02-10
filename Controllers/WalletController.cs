@@ -93,5 +93,41 @@ namespace CryptoTracker.Controllers
             return View(ViewModel);
         }
 
+        [Authorize]
+        public ActionResult New()
+        {
+            string url = "tokendata/listtokens";
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            IEnumerable<TokenDto> TokenList = response.Content.ReadAsAsync<IEnumerable<TokenDto>>().Result;
+
+            return View(TokenList);
+        }
+
+        // POST: Wallet/Create
+        [HttpPost]
+        public ActionResult Create(Wallet Wallet)
+        {
+            string url = "walletdata/addWallet";
+
+            string jsonpayload = jss.Serialize(Wallet);
+
+            Debug.Write(jsonpayload);
+
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            Debug.Write(content);
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("List");
+            }
+
+
+        }
+
     }
 }

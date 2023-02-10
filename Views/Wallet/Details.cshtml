@@ -1,32 +1,32 @@
-﻿@model CryptoTracker.Models.ViewModels.DetailsToken
+﻿@model CryptoTracker.Models.ViewModels.DetailsWallet
 @{
     ViewBag.Title = "View";
 }
-<h2>@Model.SelectedToken.TokenName</h2>
+<h2>@Model.SelectedWallet.WalletName</h2>
 <nav>
     <ul>
-        <li><a href="/Token/List">Go back to list</a></li>
-        <li><a href="/Token/Edit/@Model.SelectedToken.TokenId">Update</a></li>
-        <li><a style="color:#ab2020;" href="/Token/DeleteConfirm/@Model.SelectedToken.TokenId">Delete</a></li>
+        <li><a href="/Wallet/List">Go back to list</a></li>
+        <li><a href="/Wallet/Edit/@Model.SelectedWallet.WalletId">Update</a></li>
+        <li><a style="color:#ab2020;" href="/Wallet/DeleteConfirm/@Model.SelectedWallet.WalletId">Delete</a></li>
     </ul>
 </nav>
 <div class="row">
     <div class="col-md-6 col-sm-12">
-        <div>Description: @Model.SelectedToken.TokenDescription</div>
-        <div>Type: @Model.SelectedToken.TokenType</div>
+        <div>Description: @Model.SelectedWallet.WalletDescription</div>
+        <div>Type: @Model.SelectedWallet.WalletType</div>
     </div>
     <div class="col-md-6 col-sm-12">
-        <h2>Wallets:</h2>
+        <h2>Tokens:</h2>
         <table>
             <tr>
-                <th>Wallet</th>
+                <th>Token</th>
                 <th>Balance</th>
             </tr>
-            @foreach (var wallet in @Model.Wallet)
+            @foreach (var token in @Model.Tokens)
             {
                 <tr>
-                    <td>@wallet.Wallet</td>
-                    <td>@wallet.WalletBalance</td>
+                    <td>@token.TokenName</td>
+                    <td>@token.TokenBalance</td>
                 </tr>
             }
         </table>

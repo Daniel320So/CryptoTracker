@@ -7,10 +7,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Sockets;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CryptoTracker.Migrations;
 using CryptoTracker.Models;
+using Microsoft.AspNet.Identity;
 
 namespace CryptoTracker.Controllers
 {
@@ -57,40 +59,38 @@ namespace CryptoTracker.Controllers
             return Ok(walletDto);
         }
 
-        // PUT: api/WalletData/AddWallet/5
+        // PUT: api/WalletData/AddWallet
         [HttpPost]
-        [ResponseType(typeof(void))]
-        public IHttpActionResult AddWallet(int id, Wallet wallet)
+        [ResponseType(typeof(Wallet))]
+        public IHttpActionResult AddWallet(Wallet wallet)
         {
+            Debug.WriteLine("Add Wallet");
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            Debug.WriteLine("Testing");
 
-            if (id != wallet.WalletId)
-            {
-                return BadRequest();
-            }
+            db.Wallets.Add(wallet);
+            db.SaveChanges();
+            Debug.WriteLine("Testing");
+            //add one of each ticket at 0 qty
+            List<Token> Tokens = db.Tokens.ToList();
+            Tokens.ForEach(t =>
+                db.WalletxTokens.Add(
+                    new WalletxToken
+                    {
+                        WalletId = wallet.WalletId,
+                        TokenId = t.TokenId,
+                        balance = 0
+                    }
+                )
+            ); ;
+            Debug.WriteLine("Testing");
+            db.SaveChanges();
 
-            db.Entry(wallet).State = EntityState.Modified;
+            return CreatedAtRoute("DefaultApi", new { id = wallet.WalletId }, wallet);
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!WalletExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/WalletData/UpdateWallet

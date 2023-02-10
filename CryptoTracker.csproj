@@ -300,6 +300,7 @@
     <Content Include="Views\Wallet\Details.cshtml" />
     <Content Include="Views\Token\Details.cshtml" />
     <Content Include="Views\Token\List.cshtml" />
+    <Content Include="Views\Wallet\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
