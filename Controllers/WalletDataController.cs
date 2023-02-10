@@ -44,6 +44,10 @@ namespace CryptoTracker.Controllers
         public IHttpActionResult FindWallet(int id)
         {
             Wallet wallet = db.Wallets.Find(id);
+            if (wallet == null)
+            {
+                return NotFound();
+            }
             WalletDto walletDto = new WalletDto()
             {
                 WalletId = wallet.WalletId,
@@ -51,10 +55,7 @@ namespace CryptoTracker.Controllers
                 WalletDescription = wallet.WalletDescription,
                 WalletType = wallet.WalletType
             };
-            if (wallet == null)
-            {
-                return NotFound();
-            }
+
 
             return Ok(walletDto);
         }
@@ -96,17 +97,44 @@ namespace CryptoTracker.Controllers
         // POST: api/WalletData/UpdateWallet
         [HttpPost]
         [ResponseType(typeof(Wallet))]
-        public IHttpActionResult UpdateWallet(Wallet wallet)
+        public IHttpActionResult UpdateWallet(int id, Wallet wallet)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Wallets.Add(wallet);
-            db.SaveChanges();
+            if (id != wallet.WalletId)
+            {
 
-            return CreatedAtRoute("DefaultApi", new { id = wallet.WalletId }, wallet);
+                return BadRequest();
+            }
+
+            db.Entry(wallet).State = EntityState.Modified;
+
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!WalletExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return StatusCode(HttpStatusCode.NoContent);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // DELETE: api/WalletData/DeleteWallet/5

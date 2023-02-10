@@ -143,5 +143,26 @@ namespace CryptoTracker.Controllers
             return View(ViewModel);
         }
 
+        [HttpPost]
+        public ActionResult Update(int id, Wallet wallet)
+        {
+            Debug.WriteLine("WriteLine");
+            string url = "walletdata/updatewallet/" + id;
+            string jsonpayload = jss.Serialize(wallet);
+            HttpContent content = new StringContent(jsonpayload);
+            Debug.WriteLine(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+        }
+
     }
 }

@@ -15,6 +15,9 @@
 <form action="/Wallet/Update/@Model.SelectedWallet.WalletId" method="POST" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-6 col-sm-12">
+            <div style="display:none;">
+                <input type="text" name="WalletId" value="@Model.SelectedWallet.WalletId" />
+            </div>
             <div>
                 <label>Name:</label> <input type="text" name="WalletName" value="@Model.SelectedWallet.WalletName" />
             </div>
@@ -31,12 +34,6 @@
                 </select>
             </div>
             <div>
-                @foreach (var token in @Model.Tokens)
-                {
-                    <label>@token.TokenName Amount</label> <input type="number" name="TokenBalance-@token.TokenId" value="@token.TokenBalance" />
-                }
-            </div>
-             <div>
                 <input type="submit" value="Update Wallet" />
             </div>
         </div>
