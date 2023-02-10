@@ -128,7 +128,6 @@ namespace CryptoTracker.Controllers
                     throw;
                 }
             }
-            return StatusCode(HttpStatusCode.NoContent);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -187,7 +186,6 @@ namespace CryptoTracker.Controllers
             List<WalletxToken> WxTs = db.WalletxTokens.Where(wxt => wxt.WalletId == id).Include(wxt => wxt.Token).ToList();
 
             List<TokenDto> TokenDtos = new List<TokenDto>();
-            Debug.WriteLine(TokenDtos);
             WxTs.ForEach(wxt => TokenDtos.Add(new TokenDto()
             {
                 TokenId = wxt.Token.TokenId,
