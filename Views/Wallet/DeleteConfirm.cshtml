@@ -7,7 +7,7 @@
 <h2>Are you sure you want to delete this Wallet?</h2>
 <a href="/Wallet/List">Cancel</a>
 <div>Description: @Model.WalletDescription</div>
-<div>Type: @Model..WalletType</div>
+<div>Type: @Model.WalletType</div>
 <form action="/Wallet/Delete/@Model.WalletId" method="POST">
     <input type="submit" value="Confirm Delete" />
 </form>
