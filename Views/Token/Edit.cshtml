@@ -1,0 +1,42 @@
+﻿@model CryptoTracker.Models.ViewModels.DetailsToken
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Update Token</h2>
+<nav>
+    <ul>
+        <li><a href="/Token/List">Go back to list</a></li>
+
+        <li><a style="color:#ab2020;" href="/Token/DeleteConfirm/@Model.SelectedToken.TokenId">Delete</a></li>
+    </ul>
+</nav>
+<form action="/Token/Update/@Model.SelectedToken.TokenId" method="POST" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div style="display:none;">
+                <input type="text" name="TokenId" value="@Model.SelectedToken.TokenId" />
+            </div>
+            <div>
+                <label>Name:</label> <input type="text" name="TokenName" value="@Model.SelectedToken.TokenName"/>
+            </div>
+            <div>
+                <label>Description:</label> <input type="text" name="TokenDescription" value="@Model.SelectedToken.TokenDescription" />
+            </div>
+            <div>
+                <p>Current Risk Level: @Model.SelectedToken.TokenRiskLevel</p>
+                <label>Token Risk Level:</label>
+                <input type="radio" id="low" name="TokenRiskLevel" value="Low">
+                <label for="low">Low</label><br>
+                <input type="radio" id="medium" name="TokenRiskLevel" value="Medium">
+                <label for="medium">Medium</label><br>
+                <input type="radio" id="high" name="TokenRiskLevel" value="High">
+                <label for="high">High</label>
+            </div>
+            <div>
+                <input type="submit" value="Update Wallet" />
+            </div>
+        </div>
+    </div>
+</form>

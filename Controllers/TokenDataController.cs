@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using CryptoTracker.Migrations;
 using CryptoTracker.Models;
 
 namespace CryptoTracker.Controllers
@@ -57,10 +58,10 @@ namespace CryptoTracker.Controllers
             return Ok(tokenDto);
         }
 
-        // PUT: api/TokenData/AddToken/5
+        // PUT: api/TokenData/UpdateToken/5
         [HttpPost]
         [ResponseType(typeof(void))]
-        public IHttpActionResult AddToken(int id, Token token)
+        public IHttpActionResult UpdateToken(int id, Token token)
         {
             if (!ModelState.IsValid)
             {
@@ -92,11 +93,40 @@ namespace CryptoTracker.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+        // PUT: api/WalletData/AddWallet
+        [HttpPost]
+        [ResponseType(typeof(Wallet))]
+        public IHttpActionResult AddWallet(Wallet wallet)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        // POST: api/TokenData/UpdateToken
+            db.Wallets.Add(wallet);
+            db.SaveChanges();
+            //add one of each ticket at 0 qty
+            List<Token> Tokens = db.Tokens.ToList();
+            Tokens.ForEach(t =>
+                db.WalletxTokens.Add(
+                    new WalletxToken
+                    {
+                        WalletId = wallet.WalletId,
+                        TokenId = t.TokenId,
+                        balance = 0
+                    }
+                )
+            ); ;
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = wallet.WalletId }, wallet);
+
+        }
+
+        // POST: api/TokenData/AddToken
         [HttpPost]
         [ResponseType(typeof(Token))]
-        public IHttpActionResult UpdateToken(Token token)
+        public IHttpActionResult AddToken(Token token)
         {
             if (!ModelState.IsValid)
             {
@@ -104,6 +134,19 @@ namespace CryptoTracker.Controllers
             }
 
             db.Tokens.Add(token);
+            db.SaveChanges();
+            //add one of each Wallet at 0 amount
+            List<Wallet> Wallets = db.Wallets.ToList();
+            Wallets.ForEach(w =>
+                db.WalletxTokens.Add(
+                    new WalletxToken
+                    {
+                        WalletId = w.WalletId,
+                        TokenId = token.TokenId,
+                        balance = 0
+                    }
+                )
+            ); ;
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = token.TokenId }, token);

@@ -93,5 +93,95 @@ namespace CryptoTracker.Controllers
             return View(ViewModel);
         }
 
+        public ActionResult New()
+        {
+            return View();
+        }
+
+        // POST: Token/Create
+        [HttpPost]
+        public ActionResult Create(Token token)
+        {
+            string url = "tokendata/addToken";
+
+            string jsonpayload = jss.Serialize(token);
+
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+        }
+
+        public ActionResult Edit(int id)
+        {
+            DetailsToken ViewModel = new DetailsToken();
+
+            string url = "tokendata/findtoken/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            TokenDto SelectedToken = response.Content.ReadAsAsync<TokenDto>().Result;
+            ViewModel.SelectedToken = SelectedToken;
+
+            url = "tokendata/listwalletsfortoken/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<WalletDto> Wallets = response.Content.ReadAsAsync<IEnumerable<WalletDto>>().Result;
+            ViewModel.Wallets = Wallets;
+
+            return View(ViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Update(int id, Token token)
+        {
+            string url = "tokendata/updatetoken/" + id;
+            string jsonpayload = jss.Serialize(token);
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+        }
+
+
+        public ActionResult DeleteConfirm(int id)
+        {
+            string url = "TokenData/findToken/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            TokenDto selectedToken = response.Content.ReadAsAsync<TokenDto>().Result;
+            return View(selectedToken);
+        }
+
+        // POST: Wallet/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            string url = "TokenData/deleteToken/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+        }
+
     }
 }

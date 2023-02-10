@@ -92,14 +92,9 @@ namespace CryptoTracker.Controllers
             return View(ViewModel);
         }
 
-        [Authorize]
         public ActionResult New()
         {
-            string url = "tokendata/listtokens";
-            HttpResponseMessage response = client.GetAsync(url).Result;
-            IEnumerable<TokenDto> TokenList = response.Content.ReadAsAsync<IEnumerable<TokenDto>>().Result;
-
-            return View(TokenList);
+            return View();
         }
 
         // POST: Wallet/Create
@@ -110,11 +105,9 @@ namespace CryptoTracker.Controllers
 
             string jsonpayload = jss.Serialize(Wallet);
 
-            Debug.Write(jsonpayload);
 
             HttpContent content = new StringContent(jsonpayload);
             content.Headers.ContentType.MediaType = "application/json";
-            Debug.Write(content);
             HttpResponseMessage response = client.PostAsync(url, content).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -122,7 +115,7 @@ namespace CryptoTracker.Controllers
             }
             else
             {
-                return RedirectToAction("List");
+                return RedirectToAction("Error");
             }
         }
 
@@ -146,11 +139,9 @@ namespace CryptoTracker.Controllers
         [HttpPost]
         public ActionResult Update(int id, Wallet wallet)
         {
-            Debug.WriteLine("WriteLine");
             string url = "walletdata/updatewallet/" + id;
             string jsonpayload = jss.Serialize(wallet);
             HttpContent content = new StringContent(jsonpayload);
-            Debug.WriteLine(jsonpayload);
             content.Headers.ContentType.MediaType = "application/json";
             HttpResponseMessage response = client.PostAsync(url, content).Result;
 
@@ -173,7 +164,7 @@ namespace CryptoTracker.Controllers
             return View(selectedWallet);
         }
 
-        // POST: Booking/Delete/5
+        // POST: Wallet/Delete/5
         [HttpPost]
         public ActionResult Delete(int id)
         {

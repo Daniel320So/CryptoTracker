@@ -65,17 +65,14 @@ namespace CryptoTracker.Controllers
         [ResponseType(typeof(Wallet))]
         public IHttpActionResult AddWallet(Wallet wallet)
         {
-            Debug.WriteLine("Add Wallet");
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            Debug.WriteLine("Testing");
 
             db.Wallets.Add(wallet);
             db.SaveChanges();
-            Debug.WriteLine("Testing");
-            //add one of each ticket at 0 qty
+            //add one of each Token at 0 qty
             List<Token> Tokens = db.Tokens.ToList();
             Tokens.ForEach(t =>
                 db.WalletxTokens.Add(
@@ -87,7 +84,6 @@ namespace CryptoTracker.Controllers
                     }
                 )
             ); ;
-            Debug.WriteLine("Testing");
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = wallet.WalletId }, wallet);
