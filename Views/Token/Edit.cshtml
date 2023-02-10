@@ -40,3 +40,29 @@
         </div>
     </div>
 </form>
+<div class="col-md-6 col-sm-12">
+    <h3>Update Token Balances:</h3>
+    <table>
+        <tr>
+            <th>Wallet</th>
+            <th>Original Balance</th>
+            <th>New Balance</th>
+        </tr>
+        @foreach (var wallet in @Model.Wallets)
+        {
+            <tr>
+                <td>@wallet.WalletName</td>
+                <td>@wallet.WalletBalance</td>
+                <td>
+                    <form action="/Token/UpdateTokenBalance/@Model.SelectedToken.TokenId" method="POST" enctype="multipart/form-data">
+                        <div style="display:none;">
+                            <input type="text" name="WalletId" value="@wallet.WalletId" />
+                        </div>
+                        <input type="number" name="WalletBalance" value="@wallet.WalletBalance" />
+                        <input type="submit" value="Update" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

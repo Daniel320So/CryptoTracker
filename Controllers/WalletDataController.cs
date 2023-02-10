@@ -193,5 +193,35 @@ namespace CryptoTracker.Controllers
 
             return Ok(TokenDtos);
         }
+
+        [HttpPost]
+        public IHttpActionResult UpdateTokenBalance(int id, TokenDto tokenDto)
+        {
+            WalletxToken WxT= db.WalletxTokens.Where(wxt => wxt.WalletId == id && wxt.TokenId == tokenDto.TokenId).Include(wxt => wxt.Token).ToList()[0];
+            WxT.balance = tokenDto.TokenBalance;
+            db.Entry(WxT).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!WalletExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
     }
 }

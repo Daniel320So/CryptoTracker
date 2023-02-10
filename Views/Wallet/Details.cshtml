@@ -10,13 +10,13 @@
         <li><a style="color:#ab2020;" href="/Wallet/DeleteConfirm/@Model.SelectedWallet.WalletId">Delete</a></li>
     </ul>
 </nav>
-<div class="row">
+<div class="details">
     <div class="col-md-6 col-sm-12">
         <div>Description: @Model.SelectedWallet.WalletDescription</div>
         <div>Type: @Model.SelectedWallet.WalletType</div>
     </div>
     <div class="col-md-6 col-sm-12">
-        <h2>Tokens:</h2>
+        <h3>Token Balances:</h3>
         <table>
             <tr>
                 <th>Token</th>
@@ -31,5 +31,4 @@
             }
         </table>
     </div>
-
 </div>

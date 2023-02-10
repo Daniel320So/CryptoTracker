@@ -28,3 +28,20 @@ textarea {
     background-color: #777;
     border-color: #fff
 }
+
+.details {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.details > * {
+    width: 100%;
+}
+
+table tr {
+    padding: 5px 0;
+}
+
+table th, table td {
+    padding: 0 15px;
+}

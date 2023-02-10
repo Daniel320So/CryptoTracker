@@ -1,4 +1,5 @@
-﻿using CryptoTracker.Models;
+﻿using CryptoTracker.Migrations;
+using CryptoTracker.Models;
 using CryptoTracker.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -176,6 +177,26 @@ namespace CryptoTracker.Controllers
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+        }
+
+        //POST : Wallet/UpdateTokenBalance/1
+        [HttpPost]
+        public ActionResult UpdateTokenBalance(int id, TokenDto tokenDto)
+        {
+            string url = "WalletData/UpdateTokenBalance/" + id;
+            string jsonpayload = jss.Serialize(tokenDto);
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Edit", new {id = id});
             }
             else
             {

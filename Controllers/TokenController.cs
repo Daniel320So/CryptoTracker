@@ -183,5 +183,25 @@ namespace CryptoTracker.Controllers
             }
         }
 
+        //POST : Token/UpdateTokenBalance/1
+        [HttpPost]
+        public ActionResult UpdateTokenBalance(int id, WalletDto walletDto)
+        {
+            string url = "TokenData/UpdateTokenBalance/" + id;
+            string jsonpayload = jss.Serialize(walletDto);
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Edit", new { id = id });
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+        }
+
     }
 }
