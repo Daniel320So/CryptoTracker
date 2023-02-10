@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -151,13 +152,13 @@ namespace CryptoTracker.Controllers
         /// GET: api/WalletData/ListTokensForWallet/3
         /// </example>
         [HttpGet]
-        [ResponseType(typeof(WalletxTokenDto))]
+        [ResponseType(typeof(TokenDto))]
         public IHttpActionResult ListTokensForWallet(int id)
         {
             List<WalletxToken> WxTs = db.WalletxTokens.Where(wxt => wxt.WalletId == id).Include(wxt => wxt.Token).ToList();
 
             List<TokenDto> TokenDtos = new List<TokenDto>();
-
+            Debug.WriteLine(TokenDtos);
             WxTs.ForEach(wxt => TokenDtos.Add(new TokenDto()
             {
                 TokenId = wxt.Token.TokenId,

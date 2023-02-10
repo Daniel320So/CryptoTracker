@@ -84,14 +84,13 @@ namespace CryptoTracker.Controllers
 
             ViewModel.SelectedWallet = SelectedWallet;
 
-            //show associated keepers with this wallet
-            //url = "keeperdata/listkeepersforwallet/" + id;
-            //response = client.GetAsync(url).Result;
-            //IEnumerable<KeeperDto> ResponsibleKeepers = response.Content.ReadAsAsync<IEnumerable<KeeperDto>>().Result;
+            url = "WalletData/ListTokensForWallet/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<TokenDto> Tokens = response.Content.ReadAsAsync<IEnumerable<TokenDto>>().Result;
 
-            //ViewModel.ResponsibleKeepers = ResponsibleKeepers;
+            ViewModel.Tokens = Tokens;
 
-
+            Console.WriteLine(Tokens);
             return View(ViewModel);
         }
 

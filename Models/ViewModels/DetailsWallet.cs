@@ -10,5 +10,8 @@ namespace CryptoTracker.Models.ViewModels
     {
 
         public WalletDto SelectedWallet { get; set; }
+
+        public IEnumerable<TokenDto> Tokens { get; set; }
+
     }
 }

@@ -16,7 +16,20 @@
         <div>Type: @Model.SelectedWallet.WalletType</div>
     </div>
     <div class="col-md-6 col-sm-12">
-
+        <h2>Tokens:</h2>
+        <table>
+            <tr>
+                <th>Token</th>
+                <th>Balance</th>
+            </tr>
+            @foreach (var token in @Model.Tokens)
+            {
+                <tr>
+                    <td>@token.TokenName</td>
+                    <td>@token.TokenBalance</td>
+                </tr>
+            }
+        </table>
     </div>
 
 </div>
