@@ -214,6 +214,17 @@ namespace CryptoTracker.Controllers
             return Ok(WalletDtos);
         }
 
+        /// <summary>
+        /// Update balance in WalletxTokens with a specific TokenId
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// StatusCode(HttpStatusCode.NoContent)
+        /// </returns>
+        /// <param name="id">Token ID.</param>
+        /// <example>
+        /// POST: api/TokenData/UpdateTokenBalance/3
+        /// </example>
         [HttpPost]
         public IHttpActionResult UpdateTokenBalance(int id, WalletDto walletDto)
         {
