@@ -17,7 +17,16 @@ namespace CryptoTracker.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/TokenData/ListTokens
+        /// <summary>
+        /// Returns all token data
+        /// </summary>
+        /// <returns>
+        /// IEnumerable<TokenDto>
+        /// </returns>
+        /// <example>
+        /// GET: api/TokenData/ListTokens
+        /// </example>
+
         [HttpGet]
         public IEnumerable<TokenDto> ListTokens()
         {
@@ -30,6 +39,7 @@ namespace CryptoTracker.Controllers
                 TokenDescription = t.TokenDescription,
                 TokenName = t.TokenName,
                 TokenRiskLevel = t.TokenRiskLevel,
+                TokenSymbol = t.TokenSymbol,
 
             }));
 
@@ -37,7 +47,17 @@ namespace CryptoTracker.Controllers
 
         }
 
-        // GET: api/TokenData/FindTokens/5
+        /// <summary>
+        /// Returns data of a token
+        /// </summary>
+        /// <param name="id"> Token Id</param>
+        /// <returns>
+        /// TokenDto
+        /// </returns>
+        /// <example>
+        /// GET: api/TokenData/FindTokens/5
+        /// </example>
+
         [HttpGet]
         [ResponseType(typeof(Token))]
         public IHttpActionResult FindToken(int id)
@@ -49,6 +69,7 @@ namespace CryptoTracker.Controllers
                 TokenDescription = token.TokenDescription,
                 TokenName = token.TokenName,
                 TokenRiskLevel = token.TokenRiskLevel,
+                TokenSymbol = token.TokenSymbol,
             };
             if (token == null)
             {
@@ -58,7 +79,18 @@ namespace CryptoTracker.Controllers
             return Ok(tokenDto);
         }
 
-        // PUT: api/TokenData/UpdateToken/5
+        /// <summary>
+        ///update data of a token
+        /// </summary>
+        /// <param name="id"> Token Id</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: Tokens in the database
+        /// </returns>
+        /// <example>
+        /// POST: api/TokenData/UpdateToken/5
+        /// </example>
+
         [HttpPost]
         [ResponseType(typeof(void))]
         public IHttpActionResult UpdateToken(int id, Token token)
@@ -93,37 +125,18 @@ namespace CryptoTracker.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-        // PUT: api/WalletData/AddWallet
-        [HttpPost]
-        [ResponseType(typeof(Wallet))]
-        public IHttpActionResult AddWallet(Wallet wallet)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
-            db.Wallets.Add(wallet);
-            db.SaveChanges();
-            //add one of each ticket at 0 qty
-            List<Token> Tokens = db.Tokens.ToList();
-            Tokens.ForEach(t =>
-                db.WalletxTokens.Add(
-                    new WalletxToken
-                    {
-                        WalletId = wallet.WalletId,
-                        TokenId = t.TokenId,
-                        balance = 0
-                    }
-                )
-            ); ;
-            db.SaveChanges();
+        /// <summary>
+        /// add a new token
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: Tokens in the database
+        /// </returns>
+        /// <example>
+        /// POST: api/TokenData/AddToken
+        /// </example>
 
-            return CreatedAtRoute("DefaultApi", new { id = wallet.WalletId }, wallet);
-
-        }
-
-        // POST: api/TokenData/AddToken
         [HttpPost]
         [ResponseType(typeof(Token))]
         public IHttpActionResult AddToken(Token token)
@@ -152,7 +165,18 @@ namespace CryptoTracker.Controllers
             return CreatedAtRoute("DefaultApi", new { id = token.TokenId }, token);
         }
 
-        // DELETE: api/TokenData/DeleteToken/5
+        /// <summary>
+        /// Delete data of a token
+        /// </summary>
+        /// <param name="id"> Token Id</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: Tokens in the database
+        /// </returns>
+        /// <example>
+        /// POST: api/TokenData/DeleteToken/5
+        /// </example>
+
         [HttpPost]
         [ResponseType(typeof(Token))]
         public IHttpActionResult DeleteToken(int id)
@@ -184,34 +208,33 @@ namespace CryptoTracker.Controllers
         }
 
         /// <summary>
-        /// Gathers information about all Wallets related to a particular Token ID
+        /// Gathers information about all Tokens related to a particular Wallet ID
         /// </summary>
         /// <returns>
         /// HEADER: 200 (OK)
-        /// CONTENT: Wallets in the database
+        /// CONTENT: Tokens in the database
         /// </returns>
-        /// <param name="id">Token ID.</param>
+        /// <param name="id">Wallet ID.</param>
         /// <example>
-        /// GET: api/TokenData/ListWalletsForToken/3
+        /// GET: api/WalletData/ListTokensForWallet/3
         /// </example>
         [HttpGet]
-        [ResponseType(typeof(WalletxTokenDto))]
-        public IHttpActionResult ListWalletsForToken(int id)
+        [ResponseType(typeof(TokenDto))]
+        public IHttpActionResult ListTokensForWallet(int id)
         {
-            List<WalletxToken> WxTs = db.WalletxTokens.Where(wxt => wxt.TokenId == id).Include(wxt => wxt.Wallet).ToList();
+            List<WalletxToken> WxTs = db.WalletxTokens.Where(wxt => wxt.WalletId == id).Include(wxt => wxt.Token).ToList();
 
-            List<WalletDto> WalletDtos = new List<WalletDto>();
-
-            WxTs.ForEach(wxt => WalletDtos.Add(new WalletDto()
+            List<TokenDto> TokenDtos = new List<TokenDto>();
+            WxTs.ForEach(wxt => TokenDtos.Add(new TokenDto()
             {
-                WalletId = wxt.Wallet.WalletId,
-                WalletName = wxt.Wallet.WalletName,
-                WalletDescription = wxt.Wallet.WalletDescription,
-                WalletType = wxt.Wallet.WalletType,
-                WalletBalance = wxt.balance
+                TokenId = wxt.Token.TokenId,
+                TokenName = wxt.Token.TokenName,
+                TokenDescription = wxt.Token.TokenDescription,
+                TokenRiskLevel = wxt.Token.TokenRiskLevel,
+                TokenBalance = wxt.balance
             }));
 
-            return Ok(WalletDtos);
+            return Ok(TokenDtos);
         }
 
         /// <summary>

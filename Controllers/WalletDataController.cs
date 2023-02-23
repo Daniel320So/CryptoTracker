@@ -20,7 +20,15 @@ namespace CryptoTracker.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/WalletData/ListWallets
+        /// <summary>
+        /// Returns all Wallet data
+        /// </summary>
+        /// <returns>
+        /// IEnumerable<WalletDto>
+        /// </returns>
+        /// <example>
+        /// GET: api/WalletData/ListWallets
+        /// </example>
         [HttpGet]
         public IEnumerable<WalletDto> ListWallets()
         {
@@ -38,7 +46,16 @@ namespace CryptoTracker.Controllers
             return WalletDtos;
         }
 
-        // GET: api/WalletData/FindWallet/5
+        /// <summary>
+        /// Returns data of a Wallet
+        /// </summary>
+        /// <param name="id"> Wallet Id</param>
+        /// <returns>
+        /// WalletDto
+        /// </returns>
+        /// <example>
+        /// GET: api/WalletData/FindWallet/5
+        /// </example>
         [HttpGet]
         [ResponseType(typeof(Wallet))]
         public IHttpActionResult FindWallet(int id)
@@ -60,7 +77,17 @@ namespace CryptoTracker.Controllers
             return Ok(walletDto);
         }
 
-        // PUT: api/WalletData/AddWallet
+        /// <summary>
+        /// add a new Wallet
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: Wallet in the database
+        /// </returns>
+        /// <example>
+        /// POST: api/WalletData/AddWallet
+        /// </example>
+
         [HttpPost]
         [ResponseType(typeof(Wallet))]
         public IHttpActionResult AddWallet(Wallet wallet)
@@ -90,7 +117,17 @@ namespace CryptoTracker.Controllers
 
         }
 
-        // POST: api/WalletData/UpdateWallet
+        /// <summary>
+        ///update data of a Wallet
+        /// </summary>
+        /// <param name="id"> Wallet Id</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: TokeWalletns in the database
+        /// </returns>
+        /// <example>
+        /// POST: api/WalletData/UpdateWallet/5
+        /// </example>
         [HttpPost]
         [ResponseType(typeof(Wallet))]
         public IHttpActionResult UpdateWallet(int id, Wallet wallet)
@@ -132,7 +169,18 @@ namespace CryptoTracker.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // DELETE: api/WalletData/DeleteWallet/5
+        /// <summary>
+        /// Delete data of a Wallet
+        /// </summary>
+        /// <param name="id"> Wallet Id</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: Wallet in the database
+        /// </returns>
+        /// <example>
+        /// POST: api/WalletData/DeleteWallet/5
+        /// </example>
+
         [HttpPost]
         [ResponseType(typeof(Wallet))]
         public IHttpActionResult DeleteWallet(int id)
@@ -164,34 +212,36 @@ namespace CryptoTracker.Controllers
             return db.Wallets.Count(e => e.WalletId == id) > 0;
         }
 
+
         /// <summary>
-        /// Gathers information about all Tokens related to a particular Wallet ID
+        /// Gathers information about all Wallets related to a particular Token ID
         /// </summary>
         /// <returns>
         /// HEADER: 200 (OK)
-        /// CONTENT: Tokens in the database
+        /// CONTENT: Wallets in the database
         /// </returns>
-        /// <param name="id">Wallet ID.</param>
+        /// <param name="id">Token ID.</param>
         /// <example>
-        /// GET: api/WalletData/ListTokensForWallet/3
+        /// GET: api/TokenData/ListWalletsForToken/3
         /// </example>
         [HttpGet]
-        [ResponseType(typeof(TokenDto))]
-        public IHttpActionResult ListTokensForWallet(int id)
+        [ResponseType(typeof(WalletxTokenDto))]
+        public IHttpActionResult ListWalletsForToken(int id)
         {
-            List<WalletxToken> WxTs = db.WalletxTokens.Where(wxt => wxt.WalletId == id).Include(wxt => wxt.Token).ToList();
+            List<WalletxToken> WxTs = db.WalletxTokens.Where(wxt => wxt.TokenId == id).Include(wxt => wxt.Wallet).ToList();
 
-            List<TokenDto> TokenDtos = new List<TokenDto>();
-            WxTs.ForEach(wxt => TokenDtos.Add(new TokenDto()
+            List<WalletDto> WalletDtos = new List<WalletDto>();
+
+            WxTs.ForEach(wxt => WalletDtos.Add(new WalletDto()
             {
-                TokenId = wxt.Token.TokenId,
-                TokenName = wxt.Token.TokenName,
-                TokenDescription = wxt.Token.TokenDescription,
-                TokenRiskLevel = wxt.Token.TokenRiskLevel,
-                TokenBalance = wxt.balance
+                WalletId = wxt.Wallet.WalletId,
+                WalletName = wxt.Wallet.WalletName,
+                WalletDescription = wxt.Wallet.WalletDescription,
+                WalletType = wxt.Wallet.WalletType,
+                WalletBalance = wxt.balance
             }));
 
-            return Ok(TokenDtos);
+            return Ok(WalletDtos);
         }
 
 

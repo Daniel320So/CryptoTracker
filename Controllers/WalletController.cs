@@ -57,7 +57,15 @@ namespace CryptoTracker.Controllers
             return;
         }
 
-        // GET: Wallet/List
+        /// <summary>
+        /// View a list of Wallet Summary
+        /// </summary>
+        /// <returns>
+        /// View
+        /// </returns>
+        /// <example>
+        /// GET: Wallet/List
+        /// </example>
         public ActionResult List()
         {
             //objective: communicate with our wallet data api to retrieve a list of wallets
@@ -70,7 +78,16 @@ namespace CryptoTracker.Controllers
 
             return View(wallets);
         }
-
+        /// <summary>
+        /// View details of a wallet
+        /// </summary>
+        /// <param name="id">Wallet ID</param>
+        /// <returns>
+        /// View
+        /// </returns>
+        /// <example>
+        /// GET: Wallet/Details/1
+        /// </example>
         public ActionResult Details(int id)
         {
             DetailsWallet ViewModel = new DetailsWallet();
@@ -85,20 +102,37 @@ namespace CryptoTracker.Controllers
 
             ViewModel.SelectedWallet = SelectedWallet;
 
-            url = "WalletData/ListTokensForWallet/" + id;
+            url = "TokenData/ListTokensForWallet/" + id;
             response = client.GetAsync(url).Result;
             IEnumerable<TokenDto> Tokens = response.Content.ReadAsAsync<IEnumerable<TokenDto>>().Result;
             ViewModel.Tokens = Tokens;
 
             return View(ViewModel);
         }
+        /// <summary>
+        /// View Page to create a New Wallet
+        /// </summary>
+        /// <returns>
+        /// View
+        /// </returns>
+        /// <example>
+        /// GET: Wallet/New
+        /// </example>
 
         public ActionResult New()
         {
             return View();
         }
 
-        // POST: Wallet/Create
+        /// <summary>
+        /// Craete a Wallet
+        /// </summary>
+        /// <returns>
+        /// View
+        /// </returns>
+        /// <example>
+        /// POST: Token/Create
+        /// </example>
         [HttpPost]
         public ActionResult Create(Wallet Wallet)
         {
@@ -119,7 +153,16 @@ namespace CryptoTracker.Controllers
                 return RedirectToAction("Error");
             }
         }
-
+        /// <summary>
+        /// View the edit page of a Wallet
+        /// </summary>
+        /// <param name="id">Wallet ID</param>
+        /// <returns>
+        /// View
+        /// </returns>
+        /// <example>
+        /// GET: Wallet/Edit/1
+        /// </example>
         public ActionResult Edit(int id)
         {
             DetailsWallet ViewModel = new DetailsWallet();
@@ -137,6 +180,16 @@ namespace CryptoTracker.Controllers
             return View(ViewModel);
         }
 
+        /// <summary>
+        /// Update a wallet
+        /// </summary>
+        /// <param name="id">Wallet ID</param>
+        /// <returns>
+        /// View
+        /// </returns>
+        /// <example>
+        /// POST: Wallet/update/1
+        /// </example>
         [HttpPost]
         public ActionResult Update(int id, Wallet wallet)
         {
@@ -156,6 +209,16 @@ namespace CryptoTracker.Controllers
             }
         }
 
+        /// <summary>
+        /// View the delete page of a wallet
+        /// </summary>
+        /// <param name="id">Wallet ID</param>
+        /// <returns>
+        /// View
+        /// </returns>
+        /// <example>
+        /// GET: Wallet/DeleteConfirm/1
+        /// </example>
 
         public ActionResult DeleteConfirm(int id)
         {
@@ -165,7 +228,16 @@ namespace CryptoTracker.Controllers
             return View(selectedWallet);
         }
 
-        // POST: Wallet/Delete/5
+        /// <summary>
+        /// Delete a wallet
+        /// </summary>
+        /// <param name="id">Wallet ID</param>
+        /// <returns>
+        /// View
+        /// </returns>
+        /// <example>
+        /// POST: Wallet/Delete/5
+        /// </example>
         [HttpPost]
         public ActionResult Delete(int id)
         {
@@ -184,7 +256,16 @@ namespace CryptoTracker.Controllers
             }
         }
 
-        //POST : Wallet/UpdateTokenBalance/1
+        /// <summary>
+        /// Update Token Balance of a wallet
+        /// </summary>
+        /// <param name="id">Wallet ID</param>
+        /// <returns>
+        /// View
+        /// </returns>
+        /// <example>
+        /// POST : Wallet/UpdateTokenBalance/1
+        /// </example>
         [HttpPost]
         public ActionResult UpdateTokenBalance(int id, TokenDto tokenDto)
         {
