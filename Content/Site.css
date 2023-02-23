@@ -54,5 +54,22 @@ table th, table td {
 }
 
 .jumbotron {
-    background-color: #1a2134;
+    background-color: transparent;
+    margin-bottom: 0;
+}
+
+.jumbotron h1 {
+    color: #F0B400;
+}
+
+h1 {
+    color: #F0B400;
+}
+
+h2 {
+    color: #FCCA0C;
+}
+
+btn {
+    background-color: #F9E07E;
 }
