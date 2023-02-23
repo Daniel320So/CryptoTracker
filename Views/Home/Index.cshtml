@@ -1,10 +1,16 @@
-﻿@{
+﻿@model CryptoTracker.Models.ViewModels.Home
+@{
     ViewBag.Title = "Home Page";
 }
 
 <div class="jumbotron">
     <h1>Crypto Wallet Tracker</h1>
     <p class="lead">Crypto Wallet Tracker is an application for you to easily store your information on crypto balances across different platforms and addresses.</p>
+</div>
+
+<div>
+    <h2> Total Value In your wallets: </h2>
+    <h2> $ @Model.TotalValue</h2>
 </div>
 
 <div class="row">

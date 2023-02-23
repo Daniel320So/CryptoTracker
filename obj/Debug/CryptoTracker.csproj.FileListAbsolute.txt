@@ -371,3 +371,5 @@ C:\Users\dan32\source\repos\CryptoTracker3\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\dan32\source\repos\CryptoTracker3\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\dan32\source\repos\CryptoTracker3\obj\Debug\CryptoTracker.csproj.CopyComplete
 C:\Users\dan32\source\repos\CryptoTracker3\obj\Debug\CryptoTracker.Migrations.tokensymbol.resources
+C:\Users\dan32\source\repos\CryptoTracker3\obj\Debug\CryptoTracker.Migrations.tokenPrice.resources
+C:\Users\dan32\source\repos\CryptoTracker3\obj\Debug\CryptoTracker.Migrations.fixTokenPriceType.resources

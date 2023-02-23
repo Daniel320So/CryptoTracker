@@ -19,10 +19,16 @@
                 <input type="text" name="TokenId" value="@Model.SelectedToken.TokenId" />
             </div>
             <div>
-                <label>Name:</label> <input type="text" name="TokenName" value="@Model.SelectedToken.TokenName"/>
+                <label>Name:</label> <input type="text" name="TokenName" value="@Model.SelectedToken.TokenName" />
+            </div>
+            <div>
+                <label>Symbol:</label> <input type="text" name="TokenSymbol" value="@Model.SelectedToken.TokenSymbol" />
             </div>
             <div>
                 <label>Description:</label> <input type="text" name="TokenDescription" value="@Model.SelectedToken.TokenDescription" />
+            </div>
+            <div>
+                <label>Price:</label> <input type="number" name="TokenPrice" value="@Model.SelectedToken.TokenPrice""/>
             </div>
             <div>
                 <p>Current Risk Level: @Model.SelectedToken.TokenRiskLevel</p>
@@ -40,7 +46,7 @@
         </div>
     </div>
 </form>
-<div class="col-md-6 col-sm-12">
+<!-->div class="col-md-6 col-sm-12">
     <h3>Update Token Balances:</h3>
     <table>
         <tr>
@@ -65,4 +71,4 @@
             </tr>
         }
     </table>
-</div>
+</div-->

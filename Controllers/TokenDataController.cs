@@ -40,6 +40,7 @@ namespace CryptoTracker.Controllers
                 TokenName = t.TokenName,
                 TokenRiskLevel = t.TokenRiskLevel,
                 TokenSymbol = t.TokenSymbol,
+                TokenPrice = t.TokenPrice,
 
             }));
 
@@ -70,6 +71,7 @@ namespace CryptoTracker.Controllers
                 TokenName = token.TokenName,
                 TokenRiskLevel = token.TokenRiskLevel,
                 TokenSymbol = token.TokenSymbol,
+                TokenPrice = token.TokenPrice,
             };
             if (token == null)
             {
@@ -276,6 +278,54 @@ namespace CryptoTracker.Controllers
             }
 
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        /// <summary>
+        /// Returns the total balance of a token
+        /// </summary>
+        /// <param name="id">Token ID.</param>
+        /// <returns>
+        /// An aggregated Token Balance
+        /// </returns>
+        /// <example>
+        /// GET: api/TokenData/GetTokenBalance/1
+        /// </example>
+
+        [HttpGet]
+        public decimal GetTokenBalance(int id)
+        {
+            List<WalletxToken> WxTs = db.WalletxTokens.Where(wxt => wxt.TokenId == id).ToList();
+            decimal balance = 0;
+            WxTs.ForEach(wxt =>
+            {
+                balance += wxt.balance;
+            });
+
+            return balance;
+        }
+
+        /// <summary>
+        /// Returns the total USD Value of all token
+        /// </summary>
+        /// <returns>
+        /// A total USD value
+        /// </returns>
+        /// <example>
+        /// GET: api/TokenData/GetTotalTokenUSDValue
+        /// </example>
+
+        [HttpGet]
+        public decimal GetTotalTokenUSDValue()
+        {
+            List<TokenDto> Tokens = this.ListTokens().ToList();
+            decimal value = 0;
+            Tokens.ForEach( token =>
+            {
+                decimal balance = this.GetTokenBalance(token.TokenId);
+                value += balance * token.TokenPrice;
+            });
+
+            return value;
         }
     }
 }

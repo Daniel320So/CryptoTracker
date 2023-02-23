@@ -14,6 +14,7 @@ namespace CryptoTracker.Models
         public string TokenDescription { get; set; }
         public string TokenRiskLevel { get; set; }
         public string TokenSymbol { get; set; }
+        public decimal TokenPrice { get; set; }
 
     }
 
@@ -25,5 +26,6 @@ namespace CryptoTracker.Models
         public string TokenRiskLevel { get; set; }
         public int TokenBalance { get; set; }
         public string TokenSymbol { get; set; }
+        public decimal TokenPrice { get; set; }
     }
 }
