@@ -13,6 +13,7 @@ namespace CryptoTracker.Models
         public string TokenName { get; set; }
         public string TokenDescription { get; set; }
         public string TokenRiskLevel { get; set; }
+        public string TokenSymbol { get; set; }
 
     }
 
@@ -23,5 +24,6 @@ namespace CryptoTracker.Models
         public string TokenDescription { get; set; }
         public string TokenRiskLevel { get; set; }
         public int TokenBalance { get; set; }
+        public string TokenSymbol { get; set; }
     }
 }

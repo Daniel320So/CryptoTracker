@@ -172,7 +172,7 @@ namespace CryptoTracker.Controllers
             WalletDto SelectedWallet = response.Content.ReadAsAsync<WalletDto>().Result;
             ViewModel.SelectedWallet = SelectedWallet;
 
-            url = "WalletData/ListTokensForWallet/" + id;
+            url = "TokenData/ListTokensForWallet/" + id;
             response = client.GetAsync(url).Result;
             IEnumerable<TokenDto> Tokens = response.Content.ReadAsAsync<IEnumerable<TokenDto>>().Result;
             ViewModel.Tokens = Tokens;

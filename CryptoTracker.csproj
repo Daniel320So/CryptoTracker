@@ -227,6 +227,10 @@
     <Compile Include="Migrations\202302092234413_fixTokenId.designer.cs">
       <DependentUpon>202302092234413_fixTokenId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202302231851501_tokensymbol.cs" />
+    <Compile Include="Migrations\202302231851501_tokensymbol.designer.cs">
+      <DependentUpon>202302231851501_tokensymbol.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -352,6 +356,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202302092234413_fixTokenId.resx">
       <DependentUpon>202302092234413_fixTokenId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202302231851501_tokensymbol.resx">
+      <DependentUpon>202302231851501_tokensymbol.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
