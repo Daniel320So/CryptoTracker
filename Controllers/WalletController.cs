@@ -165,17 +165,12 @@ namespace CryptoTracker.Controllers
         /// </example>
         public ActionResult Edit(int id)
         {
-            DetailsWallet ViewModel = new DetailsWallet();
+            UpdateWallet ViewModel = new UpdateWallet();
 
             string url = "walletdata/findwallet/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             WalletDto SelectedWallet = response.Content.ReadAsAsync<WalletDto>().Result;
             ViewModel.SelectedWallet = SelectedWallet;
-
-            url = "TokenData/ListTokensForWallet/" + id;
-            response = client.GetAsync(url).Result;
-            IEnumerable<TokenDto> Tokens = response.Content.ReadAsAsync<IEnumerable<TokenDto>>().Result;
-            ViewModel.Tokens = Tokens;
 
             return View(ViewModel);
         }

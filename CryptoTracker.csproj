@@ -244,6 +244,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Token.cs" />
+    <Compile Include="Models\ViewModels\UpdateWallet.cs" />
     <Compile Include="Models\ViewModels\UpdateToken.cs" />
     <Compile Include="Models\ViewModels\DetailsToken.cs" />
     <Compile Include="Models\ViewModels\Home.cs" />
@@ -322,6 +323,7 @@
     <Content Include="Views\Token\Edit.cshtml" />
     <Content Include="Views\Token\Error.cshtml" />
     <Content Include="Views\Token\New.cshtml" />
+    <Content Include="Views\Balance\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
