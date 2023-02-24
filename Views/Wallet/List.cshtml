@@ -3,13 +3,10 @@
     ViewBag.Title = "List";
 }
 
-<h2>List</h2>
-<a href="/Wallet/New">New Wallet</a>
+<h2>Wallet Summary</h2>
+<a class="a-new" href="/Wallet/New">New Wallet</a>
 @foreach (var wallet in Model)
 {
     <h2><a href="/Wallet/Details/@wallet.WalletId">@wallet.WalletName</a></h2>
     <div>Description: @wallet.WalletDescription</div>
-    <div>Wallet Type: @wallet.WalletType</div>
-
-
 }

@@ -15,18 +15,22 @@
         <div>Description: @Model.SelectedWallet.WalletDescription</div>
         <div>Type: @Model.SelectedWallet.WalletType</div>
     </div>
-    <div class="col-md-6 col-sm-12">
+    <div class="col-md-6 col-sm-12 token-balance-table">
         <h3>Token Balances:</h3>
         <table>
             <tr>
                 <th>Token</th>
                 <th>Balance</th>
+                <th>Token Price</th>
+                <th>USD Value</th>
             </tr>
             @foreach (var token in @Model.Tokens)
             {
                 <tr>
                     <td>@token.TokenName</td>
-                    <td>@token.TokenBalance</td>
+                    <td>@token.TokenBalance @token.TokenSymbol</td>
+                    <td>@token.TokenPrice ($)</td>
+                    <td>@token.TokenValue ($)</td>
                 </tr>
             }
         </table>

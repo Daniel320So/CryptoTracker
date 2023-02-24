@@ -233,7 +233,9 @@ namespace CryptoTracker.Controllers
                 TokenName = wxt.Token.TokenName,
                 TokenDescription = wxt.Token.TokenDescription,
                 TokenRiskLevel = wxt.Token.TokenRiskLevel,
-                TokenBalance = wxt.balance
+                TokenBalance = wxt.balance,
+                TokenPrice = wxt.Token.TokenPrice,
+                TokenValue = wxt.Token.TokenPrice * wxt.balance,
             }));
 
             return Ok(TokenDtos);

@@ -27,5 +27,6 @@ namespace CryptoTracker.Models
         public int TokenBalance { get; set; }
         public string TokenSymbol { get; set; }
         public decimal TokenPrice { get; set; }
+        public decimal TokenValue { get; set; }
     }
 }

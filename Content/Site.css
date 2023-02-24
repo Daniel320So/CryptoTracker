@@ -1,9 +1,12 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #1a2134;
+    /* 
     background-image: url("./images/Home/main_background.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    */
     width: 100%;
     height: 800px;
     color: white;
@@ -28,6 +31,7 @@ input,
 select,
 textarea {
     max-width: 280px;
+    color: black;
 }
 
 .navbar-inverse .navbar-toggle:hover,
@@ -70,6 +74,19 @@ h2 {
     color: #FCCA0C;
 }
 
-btn {
+.btn-default {
     background-color: #F9E07E;
+}
+
+a {
+    color: #F9E07E;
+}
+
+.a-new {
+    color: green;
+    text-decoration: underline;
+}
+
+.token-balance-table h3 {
+    color: #F9E07E;
 }
