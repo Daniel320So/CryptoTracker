@@ -1,4 +1,4 @@
-﻿@model CryptoTracker.Models.ViewModels.DetailsToken
+﻿@model CryptoTracker.Models.ViewModels.UpdateToken
 
 @{
     ViewBag.Title = "Edit";
@@ -28,17 +28,22 @@
                 <label>Description:</label> <textarea id="TokenDescription" name="TokenDescription">@Model.SelectedToken.TokenDescription</textarea>
             </div>
             <div>
-                <label>Price:</label> <input type="number" name="TokenPrice" value="@Model.SelectedToken.TokenPrice"/>
+                <label>Price:</label> <input type="number" name="TokenPrice" value="@Model.SelectedToken.TokenPrice" />
             </div>
             <div class="risk-level">
-                <p>Current Risk Level: @Model.SelectedToken.TokenRiskLevel</p>
                 <label>Token Risk Level:</label>
-                <input type="radio" id="low" name="TokenRiskLevel" value="Low">
-                <label for="low">Low</label><br>
-                <input type="radio" id="medium" name="TokenRiskLevel" value="Medium">
-                <label for="medium">Medium</label><br>
-                <input type="radio" id="high" name="TokenRiskLevel" value="High">
-                <label for="high">High</label>
+                <br />
+                @foreach (var level in Model.TokenRiskLevels)
+                {
+                    var check = "";
+                    if (level == Model.SelectedToken.TokenRiskLevel)
+                    {
+                        check = "checked";
+                    }
+                    <input type="radio" id="@level" name="TokenRiskLevel" value="@level" @check>
+                    <label for="@level">@level</label><br>
+
+                    }
             </div>
             <div>
                 <input class="btn-default" type="submit" value="Update Wallet" />
@@ -46,29 +51,3 @@
         </div>
     </div>
 </form>
-<!--div class="col-md-6 col-sm-12">
-    <h3>Update Token Balances:</h3>
-    <table>
-        <tr>
-            <th>Wallet</th>
-            <th>Original Balance</th>
-            <th>New Balance</th>
-        </tr>
-        @foreach (var wallet in @Model.Wallets)
-        {
-            <tr>
-                <td>@wallet.WalletName</td>
-                <td>@wallet.WalletBalance</td>
-                <td>
-                    <form action="/Token/UpdateTokenBalance/@Model.SelectedToken.TokenId" method="POST" enctype="multipart/form-data">
-                        <div style="display:none;">
-                            <input type="text" name="WalletId" value="@wallet.WalletId" />
-                        </div>
-                        <input type="number" name="WalletBalance" value="@wallet.WalletBalance" />
-                        <input type="submit" value="Update" />
-                    </form>
-                </td>
-            </tr>
-        }
-    </table>
-</div-->
