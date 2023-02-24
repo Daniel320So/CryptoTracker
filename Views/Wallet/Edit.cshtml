@@ -8,8 +8,6 @@
 <nav>
     <ul>
         <li><a href="/Wallet/List">Go back to list</a></li>
-
-        <li><a style="color:#ab2020;" href="/Wallet/DeleteConfirm/@Model.SelectedWallet.WalletId">Delete</a></li>
     </ul>
 </nav>
 <form action="/Wallet/Update/@Model.SelectedWallet.WalletId" method="POST" enctype="multipart/form-data">
@@ -22,10 +20,9 @@
                 <label>Name:</label> <input type="text" name="WalletName" value="@Model.SelectedWallet.WalletName" />
             </div>
             <div>
-                <label>Description:</label> <input type="text" name="WalletDescription" value="@Model.SelectedWallet.WalletDescription" />
+                <label>Description:</label> <textarea id="WalletDescription" name="WalletDescription" rows="4" cols="50">@Model.SelectedWallet.WalletDescription</textarea>
             </div>
             <div>
-                <p>Current Wallet Type: @Model.SelectedWallet.WalletType</p>
                 <label>New Wallet Type:</label>
                 <select name="walletType">
                     <option value="Centralised Exchange Platform">Centralised Exchange Platform</option>
@@ -34,12 +31,12 @@
                 </select>
             </div>
             <div>
-                <input type="submit" value="Update Wallet" />
+                <input class="btn-default" type="submit" value="Update Wallet" />
             </div>
         </div>
     </div>
 </form>
-<div class="col-md-6 col-sm-12">
+<!--div class="col-md-6 col-sm-12">
     <h3>Update Token Balances:</h3>
     <table>
         <tr>
@@ -64,4 +61,4 @@
             </tr>
         }
     </table>
-</div>
+<div-->

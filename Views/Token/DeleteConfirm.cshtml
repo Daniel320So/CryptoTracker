@@ -4,10 +4,10 @@
     ViewBag.Title = "DeleteConfirm";
 }
 
-<h2>Are you sure you want to delete this Token?</h2>
-<a href="/Token/List">Cancel</a>
+<h2>Are you sure you want to delete @Model.TokenName?</h2>
+<a class="a-green" href="/Token/List">Cancel</a>
 <div>Description: @Model.TokenDescription</div>
 <div>Risk Level: @Model.TokenRiskLevel</div>
 <form action="/Token/Delete/@Model.TokenId" method="POST">
-    <input type="submit" value="Confirm Delete" />
+    <input class="btn-default" type="submit" value="Confirm Delete" />
 </form>

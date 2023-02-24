@@ -12,9 +12,14 @@
     color: white;
 }
 
-
+footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
+    position: relative;
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -34,6 +39,10 @@ textarea {
     color: black;
 }
 
+label {
+    display: block;
+}
+
 .navbar-inverse .navbar-toggle:hover,
 .navbar-inverse .navbar-toggle:focus {
     background-color: #777;
@@ -49,8 +58,9 @@ textarea {
     width: 100%;
 }
 
-table tr {
+table tr, table td, table th {
     padding: 5px 0;
+    border: 1px solid;
 }
 
 table th, table td {
@@ -82,11 +92,15 @@ a {
     color: #F9E07E;
 }
 
-.a-new {
+.a-green {
     color: green;
     text-decoration: underline;
 }
 
 .token-balance-table h3 {
     color: #F9E07E;
+}
+
+.risk-level label {
+    display: inline-block;
 }

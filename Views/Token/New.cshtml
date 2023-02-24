@@ -3,6 +3,7 @@
 }
 
 <h2>Create Token</h2>
+<a href="/Token/List">Cancel</a>
 <form action="/Token/Create" method="POST">
     <div>
         <label>Name:</label> <input type="text" name="TokenName" />
@@ -11,12 +12,12 @@
         <label>Symbol:</label> <input type="text" name="TokenSymbol" />
     </div>
     <div>
-        <label>Description:</label> <input type="text" name="TokenDescription" />
+        <label>Description:</label> <textarea id="TokenDescription" name="TokenDescription"></textarea>
     </div>
     <div>
         <label>Price:</label> <input type="number" name="TokenPrice" />
     </div>
-    <div>
+    <div class="risk-level">
         <label>Token Risk Level:</label>
         <br />
         <input type="radio" id="low" name="TokenRiskLevel" value="Low">
@@ -27,6 +28,6 @@
         <label for="high">High</label>
     </div>
     <div>
-        <input type="submit" value="Add Token" />
+        <input class="btn-default"type="submit" value="Add Token" />
     </div>
 </form>

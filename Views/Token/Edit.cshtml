@@ -25,12 +25,12 @@
                 <label>Symbol:</label> <input type="text" name="TokenSymbol" value="@Model.SelectedToken.TokenSymbol" />
             </div>
             <div>
-                <label>Description:</label> <input type="text" name="TokenDescription" value="@Model.SelectedToken.TokenDescription" />
+                <label>Description:</label> <textarea id="TokenDescription" name="TokenDescription">@Model.SelectedToken.TokenDescription</textarea>
             </div>
             <div>
-                <label>Price:</label> <input type="number" name="TokenPrice" value="@Model.SelectedToken.TokenPrice""/>
+                <label>Price:</label> <input type="number" name="TokenPrice" value="@Model.SelectedToken.TokenPrice"/>
             </div>
-            <div>
+            <div class="risk-level">
                 <p>Current Risk Level: @Model.SelectedToken.TokenRiskLevel</p>
                 <label>Token Risk Level:</label>
                 <input type="radio" id="low" name="TokenRiskLevel" value="Low">
@@ -41,12 +41,12 @@
                 <label for="high">High</label>
             </div>
             <div>
-                <input type="submit" value="Update Wallet" />
+                <input class="btn-default" type="submit" value="Update Wallet" />
             </div>
         </div>
     </div>
 </form>
-<!-->div class="col-md-6 col-sm-12">
+<!--div class="col-md-6 col-sm-12">
     <h3>Update Token Balances:</h3>
     <table>
         <tr>

@@ -10,7 +10,7 @@
         <li><a style="color:#ab2020;" href="/Token/DeleteConfirm/@Model.SelectedToken.TokenId">Delete</a></li>
     </ul>
 </nav>
-<div class="row">
+<div class="details">
     <div class="col-md-6 col-sm-12">
         <div>Description: @Model.SelectedToken.TokenDescription</div>
         <div>Symbol: @Model.SelectedToken.TokenSymbol</div>
@@ -28,7 +28,7 @@
             {
                 <tr>
                     <td>@walet.WalletName</td>
-                    <td>@walet.WalletBalance @Model.SelectedToken.TokenName</td>
+                    <td>@walet.WalletBalance @Model.SelectedToken.TokenSymbol</td>
                 </tr>
             }
         </table>

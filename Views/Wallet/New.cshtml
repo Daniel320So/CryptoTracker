@@ -3,12 +3,13 @@
 }
 
 <h2>Create Wallet</h2>
+<a href="/Wallet/List">Cancel</a>
 <form action="/Wallet/Create" method="POST">
     <div>
         <label>Name:</label> <input type="text" name="WalletName" />
     </div>
     <div>
-        <label>Description:</label> <input type="text" name="WalletDescription" />
+        <label>Description:</label> <textarea id="WalletDescription" name="WalletDescription" rows="4" cols="50" ></textarea>
     </div>
     <div>
         <label>Wallet Type:</label>
