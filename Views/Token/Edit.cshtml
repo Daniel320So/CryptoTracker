@@ -28,7 +28,7 @@
                 <label>Description:</label> <textarea id="TokenDescription" name="TokenDescription">@Model.SelectedToken.TokenDescription</textarea>
             </div>
             <div>
-                <label>Price:</label> <input type="number" name="TokenPrice" value="@Model.SelectedToken.TokenPrice" />
+                <label>Price:</label> <input type="number" name="TokenPrice" value="@Model.SelectedToken.TokenPrice" step=".01"/>
             </div>
             <div class="risk-level">
                 <label>Token Risk Level:</label>
