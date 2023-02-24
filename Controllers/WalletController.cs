@@ -252,6 +252,38 @@ namespace CryptoTracker.Controllers
         }
 
         /// <summary>
+        /// View the update balance page of a wallet
+        /// </summary>
+        /// <param name="id">Wallet ID</param>
+        /// <returns>
+        /// View
+        /// </returns>
+        /// <example>
+        /// GET: Wallet/EditBalance/1
+        /// </example>
+
+        public ActionResult EditBalance(int id)
+        {
+
+            DetailsWallet ViewModel = new DetailsWallet();
+
+            string url = "walletdata/findwallet/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            WalletDto SelectedWallet = response.Content.ReadAsAsync<WalletDto>().Result;
+
+            ViewModel.SelectedWallet = SelectedWallet;
+
+            url = "TokenData/ListTokensForWallet/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<TokenDto> Tokens = response.Content.ReadAsAsync<IEnumerable<TokenDto>>().Result;
+            ViewModel.Tokens = Tokens;
+
+            return View(ViewModel);
+
+        }
+
+
+        /// <summary>
         /// Update Token Balance of a wallet
         /// </summary>
         /// <param name="id">Wallet ID</param>
@@ -272,13 +304,12 @@ namespace CryptoTracker.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Edit", new {id = id});
+                return RedirectToAction("EditBalance", new {id = id});
             }
             else
             {
                 return RedirectToAction("Error");
             }
         }
-
     }
 }

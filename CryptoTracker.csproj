@@ -323,7 +323,7 @@
     <Content Include="Views\Token\Edit.cshtml" />
     <Content Include="Views\Token\Error.cshtml" />
     <Content Include="Views\Token\New.cshtml" />
-    <Content Include="Views\Balance\Edit.cshtml" />
+    <Content Include="Views\Wallet\EditBalance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
