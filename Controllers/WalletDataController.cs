@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Net.Sockets;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Antlr.Runtime;
 using CryptoTracker.Migrations;
 using CryptoTracker.Models;
 using Microsoft.AspNet.Identity;
@@ -33,15 +34,19 @@ namespace CryptoTracker.Controllers
         public IEnumerable<WalletDto> ListWallets()
         {
             List<Wallet> Wallets = db.Wallets.ToList();
+
             List<WalletDto> WalletDtos = new List<WalletDto>();
 
-            Wallets.ForEach(w => WalletDtos.Add(new WalletDto()
-            {
-                WalletId = w.WalletId,
-                WalletName = w.WalletName,
-                WalletDescription = w.WalletDescription,
-                WalletType = w.WalletType
-            }));
+            Wallets.ForEach(w => {
+                WalletDtos.Add(new WalletDto()
+                {
+                    WalletId = w.WalletId,
+                    WalletName = w.WalletName,
+                    WalletDescription = w.WalletDescription,
+                    WalletType = w.WalletType,
+                    WalletTotalValue = this.GetWalletTotalValue(w.WalletId)
+                });
+            });
 
             return WalletDtos;
         }
@@ -70,9 +75,9 @@ namespace CryptoTracker.Controllers
                 WalletId = wallet.WalletId,
                 WalletName = wallet.WalletName,
                 WalletDescription = wallet.WalletDescription,
-                WalletType = wallet.WalletType
+                WalletType = wallet.WalletType,
+                WalletTotalValue = this.GetWalletTotalValue(id)
             };
-
 
             return Ok(walletDto);
         }
@@ -284,6 +289,37 @@ namespace CryptoTracker.Controllers
             }
 
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        /// <summary>
+        /// Get total value of a wallete
+        /// </summary>
+        /// <returns>
+        /// Total value in USD
+        /// </returns>
+        /// <param name="id">Wallet ID.</param>
+        /// <example>
+        /// POST: api/WalletData/GetWalletTotalValue/3
+        /// </example>
+        public decimal GetWalletTotalValue(int id)
+        {
+            List<Token> Tokens = db.Tokens.ToList();
+            List<WalletxToken> Wxts = db.WalletxTokens.ToList();
+
+            decimal value = 0;
+            List<WalletxToken> WxtsByWalletId = Wxts.FindAll(wxt => wxt.WalletId == id);
+            Tokens.ForEach(t =>
+            {
+                decimal tokenAmount = 0;
+                List<WalletxToken> WxtsByTokenId = WxtsByWalletId.FindAll(wxt => wxt.TokenId == t.TokenId);
+                WxtsByTokenId.ForEach(wxt =>
+                {
+                    tokenAmount += wxt.balance;
+                });
+                value += tokenAmount * t.TokenPrice;
+            });
+
+            return value;
         }
     }
 }

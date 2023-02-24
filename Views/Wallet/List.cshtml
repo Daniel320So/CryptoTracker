@@ -8,5 +8,6 @@
 @foreach (var wallet in Model)
 {
     <h2><a href="/Wallet/Details/@wallet.WalletId">@wallet.WalletName</a></h2>
+    <h3> Balancec: $@wallet.WalletTotalValue</h3>
     <div>Description: @wallet.WalletDescription</div>
 }

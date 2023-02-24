@@ -231,6 +231,7 @@ namespace CryptoTracker.Controllers
             {
                 TokenId = wxt.Token.TokenId,
                 TokenName = wxt.Token.TokenName,
+                TokenSymbol = wxt.Token.TokenSymbol,
                 TokenDescription = wxt.Token.TokenDescription,
                 TokenRiskLevel = wxt.Token.TokenRiskLevel,
                 TokenBalance = wxt.balance,
